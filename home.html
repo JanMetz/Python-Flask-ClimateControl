@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature and Humidity Regulation</title>
+
+    <style>
+        body {
+        background-color:#99ccff;
+        }
+    </style>
+</head>
+
+<body>
+<center>
+<h1>Please, fill in the form below:</h1>
+    </center>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        {% for element in form %}
+            <p>
+            {{ element.label }}<br>
+            {{ element(size=32) }}
+            {{ element.description }}
+                {% for error in element.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        {% endfor %}
+
+    </form>
+
+</body>
+</html>
+
+

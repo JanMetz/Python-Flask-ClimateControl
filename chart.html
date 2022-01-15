@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Simulation</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="author" content="SitePoint">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+  <center>
+    <h1>Your simulation</h1>
+    <canvas id="chart" width="1885" height="1060"></canvas>
+  </center>
+
+
+  <script>
+  var ctx = document.getElementById("chart").getContext("2d");
+
+        var labels_js = {{ labels | tojson }};
+        var temp_js = {{ temp | tojson }};
+        var rel_js = {{ relative_humidity_perc | tojson }};
+
+        var chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels_js,
+                datasets: [
+                    {
+                        label: "Temperature",
+                        data: temp_js,
+                        fill: false,
+                        borderColor: "rgb(75, 192, 192)",
+                        lineTension: 0.1
+                    },
+
+                     {
+                        label: "Relative humidity",
+                        data: rel_js,
+                        fill: false,
+                        borderColor: "rgb(75, 102, 192)",
+                        lineTension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {x: {title: { display: true, text: 'Time'}},
+                         y: {title: {display: true, text: 'Celsius/Relative humidity %'}}}
+            }
+        });
+  </script>
+
+</body>
+</html>
+
+
